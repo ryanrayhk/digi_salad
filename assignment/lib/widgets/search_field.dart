@@ -17,6 +17,8 @@ class SearchField extends StatelessWidget {
           onPressed: onSearch,
         ),
       ),
+      textInputAction: TextInputAction.search,
+      onSubmitted: (String str){onSearch();},
     );
   }
 }

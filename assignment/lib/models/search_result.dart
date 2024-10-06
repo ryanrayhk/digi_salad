@@ -7,7 +7,7 @@ class SearchResult {
     @JsonKey(name: "resultCount")
     int? resultCount;
     @JsonKey(name: "results")
-    List<Result>? results;
+    List<Music>? results;
 
     SearchResult({
         this.resultCount,
@@ -20,7 +20,7 @@ class SearchResult {
 }
 
 @JsonSerializable()
-class Result {
+class Music {
     @JsonKey(name: "wrapperType")
     WrapperType? wrapperType;
     @JsonKey(name: "kind")
@@ -90,7 +90,7 @@ class Result {
     @JsonKey(name: "collectionArtistName")
     String? collectionArtistName;
 
-    Result({
+    Music({
         this.wrapperType,
         this.kind,
         this.artistId,
@@ -127,7 +127,7 @@ class Result {
         this.collectionArtistName,
     });
 
-    factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+    factory Music.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
 
     Map<String, dynamic> toJson() => _$ResultToJson(this);
 }

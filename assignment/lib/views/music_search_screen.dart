@@ -1,18 +1,18 @@
-// lib/views/music_search_screen.dart
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../viewmodels/music_search_viewmodel.dart';
-import './widgets/search_field.dart';
-import './widgets/music_item.dart';
+import 'package:get/get.dart';
+import '../viewmodels/music_controller.dart';
+import '../widgets/search_field.dart';
+import '../widgets/music_item.dart';
 
 class MusicSearchScreen extends StatelessWidget {
+  final MusicController musicController = Get.put(MusicController());
+  final TextEditingController _controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    final musicViewModel = Provider.of<MusicViewModel>(context);
-    final TextEditingController _controller = TextEditingController();
-
     return Scaffold(
-      appBar: AppBar(title: Text('Music Search')),
+      appBar: AppBar(title: Text('title')),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -20,21 +20,22 @@ class MusicSearchScreen extends StatelessWidget {
             SearchField(
               controller: _controller,
               onSearch: () {
-                musicViewModel.searchMusic(_controller.text);
+                musicController.searchMusic(_controller.text);
               },
             ),
-            if(musicViewModel.results != null)
             Expanded(
-              child: ListView.builder(
-                itemCount: musicViewModel.results!.length,
-                itemBuilder: (context, index) {
-                  final music = musicViewModel.results![index];
-                  return MusicItem(
-                    music: music,
-                    onPlay: () => musicViewModel.playPreview(music.previewUrl??""),
-                  );
-                },
-              ),
+              child: Obx(() {
+                return ListView.builder(
+                  itemCount: musicController.results.length,
+                  itemBuilder: (context, index) {
+                    final music = musicController.results[index];
+                    return MusicItem(
+                      music: music,
+                      onPlay: () => musicController.playPreview(music.previewUrl??""),
+                    );
+                  },
+                );
+              }),
             ),
           ],
         ),

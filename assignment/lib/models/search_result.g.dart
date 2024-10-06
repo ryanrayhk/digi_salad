@@ -9,7 +9,7 @@ part of 'search_result.dart';
 SearchResult _$SearchResultFromJson(Map<String, dynamic> json) => SearchResult(
       resultCount: (json['resultCount'] as num?)?.toInt(),
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Music.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -19,7 +19,7 @@ Map<String, dynamic> _$SearchResultToJson(SearchResult instance) =>
       'results': instance.results,
     };
 
-Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+Music _$ResultFromJson(Map<String, dynamic> json) => Music(
       wrapperType:
           $enumDecodeNullable(_$WrapperTypeEnumMap, json['wrapperType']),
       kind: $enumDecodeNullable(_$KindEnumMap, json['kind']),
@@ -61,7 +61,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       collectionArtistName: json['collectionArtistName'] as String?,
     );
 
-Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+Map<String, dynamic> _$ResultToJson(Music instance) => <String, dynamic>{
       'wrapperType': _$WrapperTypeEnumMap[instance.wrapperType],
       'kind': _$KindEnumMap[instance.kind],
       'artistId': instance.artistId,
